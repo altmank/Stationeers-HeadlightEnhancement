@@ -26,8 +26,27 @@ if (-not (Test-Path (Join-Path $GameDir 'rocketstation_Data\Managed\Assembly-CSh
     throw "Stationeers not found at '$GameDir'. Pass -GameDir or set STATIONEERS_DIR."
 }
 
-Write-Host "Building against $GameDir"
-dotnet build (Join-Path $root 'src\HeadlightEnhancementMod.csproj') `
+# The version is written in three places and nothing else keeps them in step. A published
+# build and a local build sharing a version number cannot be told apart afterwards.
+$csproj = Join-Path $root 'src\HeadlightEnhancementMod.csproj'
+$plugin = Join-Path $root 'src\HeadlightEnhancementModPlugin.cs'
+$about = Join-Path $root 'About\About.xml'
+
+$versions = [ordered]@{
+    'csproj'   = ([regex]::Match((Get-Content $csproj -Raw), '<Version>([^<]+)</Version>')).Groups[1].Value
+    'plugin'   = ([regex]::Match((Get-Content $plugin -Raw), 'pluginVersion\s*=\s*"([^"]+)"')).Groups[1].Value
+    'About.xml' = ([regex]::Match((Get-Content $about -Raw), '<Version>([^<]+)</Version>')).Groups[1].Value
+}
+# @() so a single shared version stays an array; indexing a bare string yields one char.
+$distinct = @($versions.Values | Sort-Object -Unique)
+if ($distinct.Count -ne 1 -or [string]::IsNullOrWhiteSpace($distinct[0])) {
+    $detail = ($versions.GetEnumerator() | ForEach-Object { "$($_.Key)=$($_.Value)" }) -join ', '
+    throw "Version mismatch: $detail. Bump all three to the same value."
+}
+$version = $distinct[0]
+
+Write-Host "Building $version against $GameDir"
+dotnet build $csproj `
     -c $Configuration -p:GameDir="$GameDir" --nologo
 if ($LASTEXITCODE -ne 0) { throw 'Build failed.' }
 
