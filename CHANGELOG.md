@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.6.0
+
+- `L` now cycles brightness instead of only re-applying: Stock, Low, Medium, High, wrapping.
+  The step is named in the console on each press and saved between sessions.
+- Stock is captured from each light before the mod first touches it, so it restores the real
+  shipped values, including light type and shadow strength, and works as an off switch
+  without unloading the mod.
+- `Intensity` and `Range` now define the Medium step. `ReapplyKey` is renamed `CycleKey`.
+
 ## 1.5.0
 
 - Fixed for current builds. The mod located lights by a hardcoded scene path that no

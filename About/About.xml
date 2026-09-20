@@ -2,7 +2,7 @@
 <ModMetadata xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>Headlight Enhancement</Name>
   <Author>XCeled</Author>
-  <Version>1.5.0</Version>
+  <Version>1.6.0</Version>
   <Description>Changes the Hardsuit Helmet Light, Space Helmet Light, and Headband Light to be an omnidirectional light with minimal shadows, further throw, and higher intensity than the standard helmet light. If you value being able to see things clearly over realism, this is the mod for you.
 
 Now covers every helmet and head-worn light in the game rather than a fixed list, so helmets added since the last release are picked up automatically.
@@ -10,9 +10,11 @@ Now covers every helmet and head-worn light in the game rather than a fixed list
 You need to install StationeersLaunchPad for this mod to work:
 https://github.com/StationeersLaunchPad/StationeersLaunchPad
 
-Changes are applied on initial load of a game and whenever the set of worn lights changes, so swapping helmets no longer needs a manual nudge. The "L" key still forces a re-apply.
+Press "L" in game to cycle brightness: Stock, Low, Medium, High, and back around. Stock is read off each light before the mod touches it, so it restores the real values and acts as an off switch without unloading the mod. Your choice is saved between sessions.
 
-Intensity, range, omnidirectional mode and whether to include handheld flashlights can all be set in the mod's config.
+Changes are applied on initial load of a game and whenever the set of worn lights changes, so swapping helmets no longer needs a manual nudge.
+
+The Medium step's intensity and range, omnidirectional mode, the cycle key, and whether to include handheld flashlights can all be set in the mod's config.
 
 Source code:
 https://github.com/altmank/Stationeers-HeadlightEnhancement

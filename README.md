@@ -14,19 +14,32 @@ do not install both.
 
 ## Using it
 
-Lights are adjusted when a game loads and again whenever the set of worn lights changes, so
-changing helmet is handled for you. Press `L` to force a re-apply.
+Press `L` in game to cycle brightness. Each press steps to the next level and names it in
+the console.
 
-Intensity, range, omnidirectional mode and whether handheld flashlights are included can be
-changed in the mod's config, which LaunchPad exposes at startup.
+| Step | Intensity | Throw |
+| --- | --- | --- |
+| Stock | whatever the game shipped | unchanged |
+| Low | 1.5 | 20 m |
+| Medium | 2 | 30 m |
+| High | 3 | 50 m |
+
+Stock is captured from each light before the mod first touches it, so it restores the real
+values rather than a guess. That makes it a genuine off switch without unloading the mod.
+
+The chosen step is saved and survives a restart. Lights are adjusted when a game loads and
+again whenever the set of worn lights changes, so changing helmet is handled for you.
+
+Config, which LaunchPad exposes at startup:
 
 | Setting | Default | What it does |
 | --- | --- | --- |
-| `Intensity` | `2` | Light intensity. Stock is about 1. |
-| `Range` | `30` | Throw in metres. Stock is about 12. |
-| `Omnidirectional` | `true` | Converts the spotlight to a point light. |
-| `IncludeFlashlights` | `false` | Also boost handheld flashlights. |
-| `ReapplyKey` | `L` | Re-apply by hand. |
+| `Level` | `Medium` | Step currently in use. The cycle key writes this. |
+| `Intensity` | `2` | Intensity of the Medium step. |
+| `Range` | `30` | Throw of the Medium step, in metres. |
+| `Omnidirectional` | `true` | Converts the spotlight to a point light above Stock. |
+| `IncludeFlashlights` | `false` | Also adjust handheld flashlights. |
+| `CycleKey` | `L` | Cycle to the next step. |
 
 ## Building
 
