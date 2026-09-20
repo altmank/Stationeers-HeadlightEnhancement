@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Assets.Scripts;
 using Assets.Scripts.Objects;
 using Assets.Scripts.Objects.Items;
+using Assets.Scripts.UI;
 using BepInEx;
 using BepInEx.Configuration;
 using UnityEngine;
@@ -69,8 +70,11 @@ public class HeadlightEnhancementModPlugin : BaseUnityPlugin
             "Convert the spotlight to a point light on every step above Stock.");
         _includeFlashlights = Config.Bind("Light", "IncludeFlashlights", false,
             "Also adjust handheld flashlights, not just head-worn lights.");
-        _cycleKey = Config.Bind("Input", "CycleKey", KeyCode.L,
-            "Cycle to the next brightness step.");
+        // Not L: the game binds that to ToggleLight, and KeyWrap._ToggleLight was built
+        // without SecondaryKeys, so it fires on a bare L regardless of modifiers. Sharing
+        // the key would change brightness every time the light is switched on or off.
+        _cycleKey = Config.Bind("Input", "CycleKey", KeyCode.K,
+            "Cycle to the next brightness step. Avoid L, which the game uses for light on/off.");
 
         UnityEngine.Object.DontDestroyOnLoad(gameObject);
         GameManager.OnGameStateChange += OnGameStateChange;
@@ -97,7 +101,9 @@ public class HeadlightEnhancementModPlugin : BaseUnityPlugin
             return;
         }
 
-        if (KeyManager.GetButtonDown(_cycleKey.Value))
+        // GetButtonDown already swallows input while the console is open, but not while a
+        // labeller or chat field has focus, where the key is a letter being typed.
+        if (!InputWindowBase.IsInputWindow && KeyManager.GetButtonDown(_cycleKey.Value))
         {
             CycleLevel();
             return;

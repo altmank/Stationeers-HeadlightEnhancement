@@ -14,8 +14,8 @@ do not install both.
 
 ## Using it
 
-Press `L` in game to cycle brightness. Each press steps to the next level and names it in
-the console.
+Press `K` in game to cycle brightness. Each press steps to the next level and names it in
+the console. Not `L`, which the game already uses for light on/off.
 
 | Step | Intensity | Throw |
 | --- | --- | --- |
@@ -39,7 +39,7 @@ Config, which LaunchPad exposes at startup:
 | `Range` | `30` | Throw of the Medium step, in metres. |
 | `Omnidirectional` | `true` | Converts the spotlight to a point light above Stock. |
 | `IncludeFlashlights` | `false` | Also adjust handheld flashlights. |
-| `CycleKey` | `L` | Cycle to the next step. |
+| `CycleKey` | `K` | Cycle to the next step. L is the game's light on/off. |
 
 ## Building
 

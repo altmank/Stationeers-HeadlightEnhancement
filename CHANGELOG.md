@@ -2,12 +2,17 @@
 
 ## 1.6.0
 
-- `L` now cycles brightness instead of only re-applying: Stock, Low, Medium, High, wrapping.
-  The step is named in the console on each press and saved between sessions.
+- `K` cycles brightness: Stock, Low, Medium, High, wrapping. The step is named in the
+  console on each press and saved between sessions.
+- The key moved off `L`. The game binds `L` to ToggleLight through a `KeyWrap` built without
+  `SecondaryKeys`, so it fires on a bare `L` whatever modifiers are held. Sharing the key,
+  even behind Shift, would have changed brightness on every light on/off.
+- The cycle key is ignored while a labeller or chat field has focus, not just while the
+  console is open.
 - Stock is captured from each light before the mod first touches it, so it restores the real
   shipped values, including light type and shadow strength, and works as an off switch
   without unloading the mod.
-- `Intensity` and `Range` now define the Medium step. `ReapplyKey` is renamed `CycleKey`.
+- `Intensity` and `Range` now define the Medium step. `ReapplyKey` is replaced by `CycleKey`, defaulting to `K`.
 
 ## 1.5.0
 

@@ -10,7 +10,7 @@ Now covers every helmet and head-worn light in the game rather than a fixed list
 You need to install StationeersLaunchPad for this mod to work:
 https://github.com/StationeersLaunchPad/StationeersLaunchPad
 
-Press "L" in game to cycle brightness: Stock, Low, Medium, High, and back around. Stock is read off each light before the mod touches it, so it restores the real values and acts as an off switch without unloading the mod. Your choice is saved between sessions.
+Press "K" in game to cycle brightness: Stock, Low, Medium, High, and back around. K rather than L, because the game already uses L for light on/off. Stock is read off each light before the mod touches it, so it restores the real values and acts as an off switch without unloading the mod. Your choice is saved between sessions.
 
 Changes are applied on initial load of a game and whenever the set of worn lights changes, so swapping helmets no longer needs a manual nudge.
 
