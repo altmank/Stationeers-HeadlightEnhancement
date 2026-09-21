@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.7.0
+
+- Two dimmer steps below Low: Faint at intensity 0.6 over 28 m, Dim at 1.0 over 24 m. `K`
+  now walks Stock, Faint, Dim, Low, Medium, High.
+- Both run a low intensity over a long range instead of scaling the two together. The
+  built-in point light falls off as roughly `1 / (1 + 25d²/r²)`, so the washed-out look next
+  to a wall follows intensity alone while useful reach follows `range × √intensity`. Dim
+  keeps about 98% of Low's reach for two thirds of its close-up glare.
+- `Level` now defaults to `Low` rather than `Medium`. An existing choice is untouched: the
+  step is stored in the config by name, so a saved `Low` stays `Low`.
+
 ## 1.6.0
 
 - `K` cycles brightness: Stock, Low, Medium, High, wrapping. The step is named in the

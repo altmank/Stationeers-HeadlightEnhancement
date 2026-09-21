@@ -20,9 +20,16 @@ the console. Not `L`, which the game already uses for light on/off.
 | Step | Intensity | Throw |
 | --- | --- | --- |
 | Stock | whatever the game shipped | unchanged |
+| Faint | 0.6 | 28 m |
+| Dim | 1.0 | 24 m |
 | Low | 1.5 | 20 m |
 | Medium | 2 | 30 m |
 | High | 3 | 50 m |
+
+Low is the default. Faint and Dim deliberately run a low intensity over a long range: the
+built-in point light falls off as roughly `1 / (1 + 25d²/r²)`, so the blown-out look close to
+a wall tracks intensity on its own while useful reach tracks `range × √intensity`. Dim keeps
+about 98% of Low's reach for two thirds of its close-up glare.
 
 Stock is captured from each light before the mod first touches it, so it restores the real
 values rather than a guess. That makes it a genuine off switch without unloading the mod.
@@ -34,7 +41,7 @@ Config, which LaunchPad exposes at startup:
 
 | Setting | Default | What it does |
 | --- | --- | --- |
-| `Level` | `Medium` | Step currently in use. The cycle key writes this. |
+| `Level` | `Low` | Step currently in use. The cycle key writes this. |
 | `Intensity` | `2` | Intensity of the Medium step. |
 | `Range` | `30` | Throw of the Medium step, in metres. |
 | `Omnidirectional` | `true` | Converts the spotlight to a point light above Stock. |

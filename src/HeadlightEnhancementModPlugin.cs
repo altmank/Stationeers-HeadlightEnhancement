@@ -10,10 +10,13 @@ using UnityEngine;
 
 namespace HeadlightEnhancementMod;
 
-/// <summary>Brightness steps the cycle key walks through.</summary>
+/// <summary>Brightness steps the cycle key walks through, dimmest first. The config stores
+/// the step by name, so the ordinals are free to move when a step is added.</summary>
 public enum LightLevel
 {
     Stock,
+    Faint,
+    Dim,
     Low,
     Medium,
     High,
@@ -24,10 +27,13 @@ public class HeadlightEnhancementModPlugin : BaseUnityPlugin
 {
     public const string pluginGuid = "net.xceled.stationeers.headlightenhancementmod";
     public const string pluginName = "HeadlightEnhancementMod";
-    public const string pluginVersion = "1.6.0";
+    public const string pluginVersion = "1.7.0";
 
     private static readonly LightLevel[] Cycle =
-        { LightLevel.Stock, LightLevel.Low, LightLevel.Medium, LightLevel.High };
+    {
+        LightLevel.Stock, LightLevel.Faint, LightLevel.Dim,
+        LightLevel.Low, LightLevel.Medium, LightLevel.High,
+    };
 
     /// <summary>What a light looked like before this mod first touched it.</summary>
     private readonly struct Original
@@ -61,8 +67,8 @@ public class HeadlightEnhancementModPlugin : BaseUnityPlugin
 
     private void Awake()
     {
-        _level = Config.Bind("Light", "Level", LightLevel.Medium,
-            "Brightness step in use. The cycle key walks Stock, Low, Medium, High and saves the choice here.");
+        _level = Config.Bind("Light", "Level", LightLevel.Low,
+            "Brightness step in use. The cycle key walks Stock, Faint, Dim, Low, Medium, High and saves the choice here.");
         _intensity = Config.Bind("Light", "Intensity", 2f,
             "Intensity of the Medium step. Stock is whatever the game shipped.");
         _range = Config.Bind("Light", "Range", 30f, "Throw of the Medium step, in metres.");
@@ -148,6 +154,13 @@ public class HeadlightEnhancementModPlugin : BaseUnityPlugin
     {
         switch (level)
         {
+            // Built-in point light attenuation is roughly 1 / (1 + 25 * d^2 / r^2), so the
+            // glare on nearby geometry follows intensity alone while the useful reach follows
+            // range * sqrt(intensity). Faint and Dim trade intensity away for range rather
+            // than scaling both: Dim keeps about 98% of Low's reach for two thirds of its
+            // close-up glare.
+            case LightLevel.Faint: return (0.6f, 28f);
+            case LightLevel.Dim: return (1f, 24f);
             case LightLevel.Low: return (1.5f, 20f);
             case LightLevel.Medium: return (_intensity.Value, _range.Value);
             case LightLevel.High: return (3f, 50f);
