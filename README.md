@@ -48,6 +48,22 @@ Config, which LaunchPad exposes at startup:
 | `IncludeFlashlights` | `false` | Also adjust handheld flashlights. |
 | `CycleKey` | `K` | Cycle to the next step. L is the game's light on/off. |
 
+## Multiplayer
+
+Only the players who want brighter lights need the mod. The host does not need it, and players
+with and without it, or on different versions of it, can play together.
+
+- The mod changes how lights are drawn on your own screen and nothing else. It sends nothing over
+  the network, and nothing it changes is part of what the game shares between players.
+- On your screen it adjusts every head-worn light in the world, not only yours: other players'
+  helmets and headlamps shine at your step too.
+- A player without the mod sees every light as the game ships it, yours included. Your step never
+  reaches anyone else's screen.
+- The step and every other setting belong to each player, in their own config.
+- Joining a game works the same as loading a save: the lights are adjusted once the world is
+  loaded, and again whenever a light comes or goes, such as a player joining with a helmet on.
+- Worked out from the game's code rather than from a multiplayer session.
+
 ## Building
 
 Needs the .NET SDK and a Stationeers install with BepInEx and StationeersLaunchPad already

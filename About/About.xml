@@ -18,6 +18,8 @@ Changes are applied on initial load of a game and whenever the set of worn light
 
 The Medium step's intensity and range, omnidirectional mode, the cycle key, and whether to include handheld flashlights can all be set in the mod's config.
 
+Multiplayer: only the players who want brighter lights need the mod; the host does not. It changes how lights look on your own screen and sends nothing, so it is safe in any mix of players and versions. On your screen other players' head lights use your step too, and a player without the mod sees every light, yours included, as the game ships it.
+
 Source code:
 https://github.com/altmank/Stationeers-HeadlightEnhancement
 
